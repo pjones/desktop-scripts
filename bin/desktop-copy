@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+################################################################################
+set -eu
+set -o pipefail
+
+################################################################################
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options]
+
+  -h      This message
+
+Copy the command line or standard input to the clipboard.
+EOF
+}
+
+################################################################################
+xorg_copy() {
+  args=("-i" "-selection" "clipboard")
+
+  if [ $# -gt 0 ]; then
+    echo "$@" | xclip "${args[@]}"
+  else
+    xclip "${args[@]}"
+  fi
+}
+
+################################################################################
+wayland_copy() {
+  wl-copy "$@"
+}
+
+################################################################################
+main() {
+  if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+    wayland_copy "$@"
+  else
+    xorg_copy "$@"
+  fi
+}
+
+################################################################################
+while getopts "h" o; do
+  case "${o}" in
+  h)
+    usage
+    exit
+    ;;
+
+  *)
+    exit 1
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+main "$@"

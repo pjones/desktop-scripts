@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+################################################################################
+set -eu
+set -o pipefail
+
+################################################################################
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [options]
+
+  -h      This message
+
+Print the clipboard contents on standard output.
+EOF
+}
+
+################################################################################
+main() {
+  if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+    wl-paste
+  else
+    xclip -o -selection clipboard
+  fi
+}
+
+################################################################################
+while getopts "h" o; do
+  case "${o}" in
+  h)
+    usage
+    exit
+    ;;
+
+  *)
+    exit 1
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+main "$@"
