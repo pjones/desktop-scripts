@@ -1,5 +1,5 @@
 {
-  description = "Peter's desktop scripts";
+  description = "Peter's desktop configuration and scripts";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
@@ -29,5 +29,8 @@
             { desktop-scripts = self.packages.${prev.system}.desktop-scripts; };
         };
       };
+
+      nixosModules.default = import ./nixos;
+      homeManagerModules.default = import ./home;
     };
 }
