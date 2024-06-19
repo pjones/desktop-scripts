@@ -5,6 +5,23 @@ let
 in
 {
   config = {
+    # Additional packages to install:
+    home.packages = with pkgs; [
+      networkmanagerapplet # NetworkManager control applet for GNOME
+    ];
+
+    # This uses `xsession` but it's needed for Wayland too:
+    xsession.preferStatusNotifierItems = true;
+
+    # Tray icon for network connections:
+    services.network-manager-applet.enable = true;
+
+    # Tray icon for disks:
+    services.udiskie = {
+      enable = true;
+      automount = false;
+    };
+
     # Set XDG user directories:
     xdg.userDirs = {
       enable = true;
