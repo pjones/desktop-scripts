@@ -5,6 +5,9 @@ let
   stdenv = pkgs.stdenvNoCC;
 
   deps = with pkgs; [
+    coreutils
+    findutils
+    gnugrep
   ];
 
   path = lib.makeBinPath deps;
