@@ -1,10 +1,14 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   avatar = pkgs.callPackage ../pkgs/pjones-avatar.nix { };
 in
 {
-  config = {
+  options.pjones.desktop-scripts = {
+    enable = lib.mkEnableOption "Generic graphical settings";
+  };
+
+  config = lib.mkIf config.pjones.desktop-scripts.enable {
     # Additional packages to install:
     home.packages = with pkgs; [
       networkmanagerapplet # NetworkManager control applet for GNOME

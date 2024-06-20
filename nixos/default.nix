@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  config = {
+  options.pjones.desktop-scripts = {
+    enable = lib.mkEnableOption "Generic graphical settings";
+  };
+
+  config = lib.mkIf config.pjones.desktop-scripts.enable {
     # Packages to install:
     environment.systemPackages = [
       (pkgs.callPackage ../pkgs/pjones-avatar.nix { })
