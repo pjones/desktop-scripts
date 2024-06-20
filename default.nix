@@ -8,6 +8,8 @@ let
     coreutils
     findutils
     gnugrep
+    openssh
+    procps
   ];
 
   path = lib.makeBinPath deps;
