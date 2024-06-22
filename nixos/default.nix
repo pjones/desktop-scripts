@@ -9,10 +9,18 @@
     # Packages to install:
     environment.systemPackages = [
       (pkgs.callPackage ../pkgs/pjones-avatar.nix { })
+      pkgs.adwaita-qt # A style to bend Qt applications to look like they belong into GNOME Shell
+      pkgs.adwaita-qt6 # A style to bend Qt applications to look like they belong into GNOME Shell
+      pkgs.gnome.adwaita-icon-theme # Adwaita icon them
+      pkgs.gnome.gnome-themes-extra # Dark theme
     ];
 
     # System services that need to be running:
     services.udisks2.enable = true;
+
+    # For setting GTK themes:
+    programs.dconf.enable = true;
+    services.dbus.packages = [ pkgs.dconf ];
 
     # Fonts:
     fonts = {

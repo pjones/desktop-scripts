@@ -4,6 +4,10 @@ let
   avatar = pkgs.callPackage ../pkgs/pjones-avatar.nix { };
 in
 {
+  imports = [
+    ./theme.nix
+  ];
+
   options.pjones.desktop-scripts = {
     enable = lib.mkEnableOption "Generic graphical settings";
   };
