@@ -7,7 +7,9 @@ let
   deps = with pkgs; [
     coreutils
     findutils
+    gawk
     gnugrep
+    jq
     openssh
     procps
   ];
