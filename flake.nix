@@ -18,10 +18,13 @@
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
-      packages = forAllSystems (system: {
-        default = self.packages.${system}.desktop-scripts;
-        desktop-scripts = import ./. { pkgs = nixpkgsFor.${system}; };
-      });
+      packages = forAllSystems (system:
+        let pkgs = nixpkgsFor.${system};
+        in {
+          default = self.packages.${system}.desktop-scripts;
+          desktop-scripts = import ./. { inherit pkgs; };
+          nerd-hyperlegible = pkgs.callPackage pkgs/nerd-hyperlegible.nix { };
+        });
 
       overlays = {
         desktop-scripts = final: prev: {

@@ -19,8 +19,8 @@
       };
 
       font = {
-        package = pkgs.overpass;
-        name = "Overpass 12";
+        package = pkgs.atkinson-hyperlegible;
+        name = "Atkinson Hyperlegible Regular 12";
       };
 
       gtk2.extraConfig = ''

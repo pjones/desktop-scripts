@@ -28,6 +28,8 @@
       fontDir.enable = true;
       enableGhostscriptFonts = true;
       packages = with pkgs; [
+        (pkgs.callPackage ../pkgs/nerd-hyperlegible.nix { })
+        atkinson-hyperlegible
         dejavu_fonts
         hermit
         ibm-plex
