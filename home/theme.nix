@@ -18,6 +18,12 @@
         package = pkgs.gnome.adwaita-icon-theme;
       };
 
+      cursorTheme = {
+        name = "Adwaita";
+        package = pkgs.gnome.adwaita-icon-theme;
+        size = 32;
+      };
+
       font = {
         package = pkgs.atkinson-hyperlegible;
         name = "Atkinson Hyperlegible Regular 12";
