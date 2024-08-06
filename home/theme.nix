@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 
+let
+  envVars = {
+    QT_STYLE_OVERRIDE = "Adwaita-Dark";
+  };
+in
 {
   config = lib.mkIf config.pjones.desktop-scripts.enable {
     # For Gnome settings:
@@ -37,5 +42,8 @@
         gtk-key-theme-name = "Emacs";
       };
     };
+
+    home.sessionVariables = envVars;
+    systemd.user.sessionVariables = envVars;
   };
 }
