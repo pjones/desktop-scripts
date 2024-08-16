@@ -47,14 +47,6 @@ in
 
     # Application menu items:
     xdg.desktopEntries = {
-      lock-screen = {
-        name = "Lock Screen";
-        exec = "loginctl lock-session";
-        icon = "emblem-system";
-        terminal = false;
-        categories = [ "System" ];
-      };
-
       sleep-system = {
         name = "Sleep";
         exec = "systemctl suspend-then-hibernate";
