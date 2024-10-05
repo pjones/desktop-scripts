@@ -3,6 +3,7 @@
 let
   envVars = {
     QT_STYLE_OVERRIDE = "Adwaita-Dark";
+    GTK_THEME = "${config.gtk.theme.name}";
   };
 in
 {
