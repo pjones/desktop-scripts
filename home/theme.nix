@@ -1,15 +1,15 @@
 { config, lib, pkgs, ... }:
 
-let
-  envVars = {
-    QT_STYLE_OVERRIDE = "Adwaita-Dark";
-    GTK_THEME = "${config.gtk.theme.name}";
-  };
-in
 {
   config = lib.mkIf config.pjones.desktop-scripts.enable {
     # For Gnome settings:
     dconf.enable = true;
+
+    # For Qt apps:
+    qt = {
+      enable = true;
+      platformTheme.name = "gtk3";
+    };
 
     gtk = {
       enable = true;
@@ -44,7 +44,26 @@ in
       };
     };
 
-    home.sessionVariables = envVars;
-    systemd.user.sessionVariables = envVars;
+    home.packages = [
+      pkgs.glib.bin # For gsettings
+    ];
+
+    xdg.desktopEntries = {
+      dark-theme = {
+        name = "Prefer a Dark Theme";
+        icon = "emblem-system";
+        terminal = false;
+        categories = [ "System" ];
+        exec = "desktop-theme-dark";
+      };
+
+      light-theme = {
+        name = "Prefer a Light Theme";
+        icon = "emblem-system";
+        terminal = false;
+        categories = [ "System" ];
+        exec = "desktop-theme-light";
+      };
+    };
   };
 }
